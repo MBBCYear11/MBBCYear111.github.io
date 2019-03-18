@@ -17,8 +17,7 @@
 
 body {
   font-family: 'Space Mono', monospace;
-  /*background-color: rgb(225, 225, 225);*/
-  background-image: url('./KWp2vVP.gif');
+  background-color: rgb(225, 225, 225);
   width: 100%;
   text-align: center;
 }
