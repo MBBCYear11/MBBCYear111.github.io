@@ -8,11 +8,23 @@
 	position: fixed;
 	display: block;
 	margin-top: 5px;
-	font-size: 100%;
+	font-size: 60%;
 	color: white;
-	background-color: rgba(200, 200, 255, 0.4);
+	background-color: rgba(0,0,20,0.6);
 	padding: 10px;
-	margin: 1%;
+	margin: 0%;
+}
+
+.content {
+	padding: 5px 20px;
+	background-color: rgba(0,0,50,0.1);
+	margin-left: 20%;
+	margin-right: 20%;
+	color: black;
+}
+
+.nav a {
+	color: rgb(200, 200, 200);
 }
 
 body {
@@ -20,6 +32,7 @@ body {
   background-color: rgb(225, 225, 225);
   width: 100%;
   text-align: center;
+  margin: 0;
 }
 
 .nav {
