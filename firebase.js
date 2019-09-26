@@ -433,4 +433,5 @@ Smoother transitions for achievements
 Mobile
 Less loading time
 Security
+Finish other pages
 `);
