@@ -54,15 +54,15 @@ revealPoints();
 window.addEventListener("load", (e) => {checkStreaks()});
     
 function checkStreaks() {
-    console.log(loggedIn);
+    //console.log(loggedIn);
     if (loggedIn) {
     db.collection("users").doc(id).get().then(doc => {
     var previousDate = ((doc.data()["streaks"]["seconds"])*1000);
     var number_visited = doc.data()["number_visited"];
-    console.log(previousDate);
+    //console.log(previousDate);
     previousDate = new Date(previousDate);
-    console.log(previousDate);
-    console.log(new Date());
+    //console.log(previousDate);
+    //console.log(new Date());
     var previousYear = previousDate.getFullYear();
     var previousMonth = previousDate.getMonth();
     var previousDay = previousDate.getDate();
@@ -70,29 +70,29 @@ function checkStreaks() {
     var currentMonth = (new Date()).getMonth();
     var currentDay = (new Date()).getDate();
     if ((currentMonth == previousMonth) && (currentYear == previousYear) && ((previousDay + 1) == currentDay)) {
-        console.log('added');
+        //console.log('added');
         db.collection("users").doc(id).update({
             number_visited: number_visited + 1,
             streaks: new Date()
     })}
     else if ((currentMonth == previousMonth) && (currentYear == previousYear) && ((previousDay) !== currentDay)) {
-        console.log('reset');
+        //console.log('reset');
         db.collection("users").doc(id).update({
             number_visited: 0,
             streaks: new Date()
         })
     }
     else {
-        console.log("nothing");
+        //console.log("nothing");
     }
     var num_streaks = doc.data()["number_visited"];
     var _bool = doc.data()["seven_streaks"];
     var _bool2 = doc.data()["fifty_streaks"];
     var _bool3 = doc.data()["year_streaks"];
-    console.log(num_streaks);
-    console.log(_bool);
-    console.log(_bool2);
-    console.log(_bool3);
+    //console.log(num_streaks);
+    //console.log(_bool);
+    //console.log(_bool2);
+    //console.log(_bool3);
     if ((num_streaks == 7) && (_bool == false)) {
         document.getElementById("a5").style.display = "block";
         function hide() {document.getElementById("a5").style.display = "none";}
@@ -119,8 +119,8 @@ function checkStreaks() {
     }
     var birthday = ((doc.data()["birthday"]["seconds"])*1000);
     var prevbirthday = (doc.data()["prevbirthday"]["seconds"])*1000;
-    console.log(birthday);
-    console.log(prevbirthday);
+    //console.log(birthday);
+    //console.log(prevbirthday);
     prevbirthday = new Date(prevbirthday);
     birthday = new Date(birthday);
     var prevbirthdayYear = prevbirthday.getFullYear();
@@ -138,7 +138,7 @@ function checkStreaks() {
     })
     }
     else {
-        console.log("not logged in");
+        //console.log("not logged in");
     }
 }
 
@@ -147,24 +147,24 @@ const signup = document.querySelector("#signupform");
 signup.addEventListener('submit', (e) => {
     e.preventDefault();
     if (signup.newPassword.value === signup.confirmPassword.value) {
-        console.log(db.collection("users").where("username","==",signup.newUsername.value).get().then())
+        /*console.log(*/db.collection("users").where("username","==",signup.newUsername.value).get().then()//)
         var counter = 0;
         var domain = true;
         var done = false;
         var outsideUsername = signup.newUsername.value;
         db.collection('users').get().then((snapshot) => {
             snapshot.docs.forEach(doc => {
-                console.log("Function 1 starts");
+                //console.log("Function 1 starts");
                 done = true;
                 data = doc.data()["name"];
                 if (data == outsideUsername) {
                     counter += 1; 
-                    console.log("counter: " + counter);
+                    //console.log("counter: " + counter);
                 }
             })
         })
-        console.log("final counter: " + counter);
-        console.log("Function 2 starts");
+        //console.log("final counter: " + counter);
+        //console.log("Function 2 starts");
         if (counter == 0) {
         db.collection('users').add({
             name: signup.newName.value,
@@ -180,10 +180,10 @@ signup.addEventListener('submit', (e) => {
             points: 0,
             scum: false,
             number_visited: 0}).then(docRef => {
-                console.log(docRef.id);
+                //console.log(docRef.id);
                 id = docRef.id;
                 setCookie("identification", id,2);
-        console.log("submitted...");
+        //console.log("submitted...");
         loggedIn = true;
         name = signup.newName.value;
         document.getElementById("signup").innerHTML = "Logout.";
@@ -200,7 +200,7 @@ signup.addEventListener('submit', (e) => {
         revealPoints();           })
         }
         else {
-            console.log("ready: " + ready);
+            //console.log("ready: " + ready);
             document.getElementById("nonmatchingpasswords").innerHTML = "Username already exists";
         }
     }
@@ -223,10 +223,10 @@ login.addEventListener("submit", (e) => {
                 if ((localUsername == login.username.value) && (localPassword == login.password.value)) {
                     loggedIn = true;
                     name = doc.data()["name"];
-                    console.log(doc.data().id);
+                    //console.log(doc.data().id);
                     document.getElementById("login").innerHTML = "Welcome, " + name + ".";
                     document.getElementById("signup").innerHTML = "Logout.";
-                    console.log(loginform.style.visibility);
+                    //console.log(loginform.style.visibility);
                     document.getElementById("loginform").style.visibility = "hidden";
                     document.getElementById("incorrectusername").innerHTML = "";
                     document.getElementById("password").value = "";
@@ -234,7 +234,7 @@ login.addEventListener("submit", (e) => {
                     toggleVisibilityLogin(document.getElementById("login"),document.getElementById("loginform"));
                     toggleVisibilitySignUp(document.getElementById("signup"),document.getElementById("signupform"));
                     id = doc.id;
-                    console.log(id);
+                    //console.log(id);
                     setCookie("name",name,2);
                     setCookie("loggedIn", "true", 2);
                     setCookie("identification", id, 2);
@@ -244,8 +244,8 @@ login.addEventListener("submit", (e) => {
                 }
             })
         })
-        console.log(counter);
-        if (counter === 0) {console.log("incorrect"); document.getElementById("incorrectusername").innerHTML = "Incorrect Username or Password";
+        //console.log(counter);
+        if (counter === 0) {/*console.log("incorrect");*/ document.getElementById("incorrectusername").innerHTML = "Incorrect Username or Password";
     }
     }
     checkLogin();
@@ -253,12 +253,12 @@ login.addEventListener("submit", (e) => {
 
 function toggleVisibilityLogin(host, element1){
     host.addEventListener("click", (e) => {e.preventDefault();
-    console.log(document.getElementById("username").style.visibility);
-    console.log(document.getElementById("password").style.visibility);
-    console.log(element1);
-    console.log(element1.visibility);
+    //console.log(document.getElementById("username").style.visibility);
+    //console.log(document.getElementById("password").style.visibility);
+    //console.log(element1);
+    //console.log(element1.visibility);
     if (document.getElementById("password").style.visibility == "visible") {
-        console.log("break 3");
+        //console.log("break 3");
         function vis2() {document.getElementById("username").style.visibility = "";}
         function vis21() {document.getElementById("password").style.visibility = "";}
         document.getElementById("loginbutton").style.visibility = "";
@@ -284,8 +284,8 @@ function logout() {
 toggleVisibilityLogin(document.getElementById("login"),document.getElementById("loginform"));
 function toggleVisibilitySignUp(host, element1){
     host.addEventListener("click", (e) => {e.preventDefault();
-        console.log("break1");
-        console.log(element1.style.visibility);
+        //console.log("break1");
+        //console.log(element1.style.visibility);
     if (host.innerHTML === "Logout.") {
         logout();}
     else if (document.getElementById("newPassword").style.visibility == "visible") {
@@ -300,7 +300,7 @@ function toggleVisibilitySignUp(host, element1){
         setTimeout(vis3,400);
         }
     else if (element1.style.visibility == "hidden") {
-        console.log("break 2");
+        //console.log("break 2");
         function vis4() {document.getElementById("newUsername").style.visibility = "visible";}
         function vis5() {document.getElementById("newPassword").style.visibility = "visible";}
         function vis6() {document.getElementById("confirmPassword").style.visibility = "visible";}
@@ -315,9 +315,9 @@ function toggleVisibilitySignUp(host, element1){
 
 toggleVisibilitySignUp(document.getElementById("signup"),document.getElementById("signupform"));
 
-console.log(document.getElementById("title").innerHTML);
-console.log(document.getElementById("title").style.visibility);
-console.log(document.getElementById("title").style.display);
+//console.log(document.getElementById("title").innerHTML);
+//console.log(document.getElementById("title").style.visibility);
+//console.log(document.getElementById("title").style.display);
 
 document.getElementById("credit").addEventListener("click", e => {
     if(loggedIn){
@@ -337,14 +337,14 @@ document.getElementById("credit").addEventListener("click", e => {
 if (loggedIn) {
 db.collection('users').doc(id).onSnapshot(snapshot => {
     var changes = snapshot.docChanges();
-    console.log(changes);
+    //console.log(changes);
 })}
 
 function revealPoints () {
     if (loggedIn) {
         db.collection('users').doc(id).get().then(doc => {
             var points =  doc.data()["points"];
-            console.log("points: " + points);
+            //console.log("points: " + points);
             document.getElementById("points").innerHTML = points + "pts<div id='buy_more' style='font-size: 10pt'>Buy More (coming soon)</div>";
             var streaks = doc.data()["number_visited"];
             document.getElementById("streaks").innerHTML = streaks;
@@ -408,7 +408,7 @@ document.getElementById("sample-image5").addEventListener("click", e => {
 
 document.getElementById("title").addEventListener("click", e => 
 {
-    console.log("You scum!");
+    //console.log("You scum!");
     if(loggedIn){
         db.collection("users").doc(id).get().then(doc => {
             
@@ -421,3 +421,16 @@ document.getElementById("title").addEventListener("click", e =>
     points: doc.data()["points"] + 20})
     
 }})}})
+
+
+console.log(`Next patch fix:
+Stop multiple usernames that are the same
+Fix up spacing of login buttons, alerts
+Make sign up and login forms collapsed after login
+Add background image to streaks
+Make CSS more stable
+Smoother transitions for achievements
+Mobile
+Less loading time
+Security
+`);
