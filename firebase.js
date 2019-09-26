@@ -38,7 +38,7 @@ else {
     var name = "";
     var id = "";
 }
-
+revealPoints();
 //window.addEventListener("load",(e) => {
     if (name) {
         document.getElementById("login").innerHTML = "Welcome, " + name + ".";
@@ -85,6 +85,56 @@ function checkStreaks() {
     else {
         console.log("nothing");
     }
+    var num_streaks = doc.data()["number_visited"];
+    var _bool = doc.data()["seven_streaks"];
+    var _bool2 = doc.data()["fifty_streaks"];
+    var _bool3 = doc.data()["year_streaks"];
+    console.log(num_streaks);
+    console.log(_bool);
+    console.log(_bool2);
+    console.log(_bool3);
+    if ((num_streaks == 7) && (_bool == false)) {
+        document.getElementById("a5").style.display = "block";
+        function hide() {document.getElementById("a5").style.display = "none";}
+        setTimeout(hide,8000);
+        db.collection('users').doc(id).update({
+        seven_streaks: true,
+        points: doc.data()["points"] + 20 })
+    }
+    if ((num_streaks == 50) && (_bool2 == false)) {
+        document.getElementById("a8").style.display = "block";
+        function hide() {document.getElementById("a8").style.display = "none";}
+        setTimeout(hide,8000);
+        db.collection('users').doc(id).update({
+        fifty_streaks: true,
+        points: doc.data()["points"] + 100 })
+    }
+    if ((num_streaks == 365) && (_bool3 == false)) {
+        document.getElementById("a9").style.display = "block";
+        function hide() {document.getElementById("a9").style.display = "none";}
+        setTimeout(hide,8000);
+        db.collection('users').doc(id).update({
+        year_streaks: true,
+        points: doc.data()["points"] + 1000 })
+    }
+    var birthday = ((doc.data()["birthday"]["seconds"])*1000);
+    var prevbirthday = (doc.data()["prevbirthday"]["seconds"])*1000;
+    console.log(birthday);
+    console.log(prevbirthday);
+    prevbirthday = new Date(prevbirthday);
+    birthday = new Date(birthday);
+    var prevbirthdayYear = prevbirthday.getFullYear();
+    var birthdayYear = birthday.getFullYear();
+    var birthdayMonth = birthday.getMonth();
+    var birthdayDay = birthday.getDate();
+    if (birthdayYear !== currentYear && birthdayMonth == currentMonth && birthdayDay == currentDay && prevbirthdayYear !== currentYear) {
+        document.getElementById("a4").style.display = "block";
+        function hide() {document.getElementById("a4").style.display = "none";}
+        setTimeout(hide,8000);
+        db.collection('users').doc(id).update({
+        prevbirthday: new Date(),
+        points: doc.data()["points"] + 50 })
+    }
     })
     }
     else {
@@ -121,7 +171,18 @@ signup.addEventListener('submit', (e) => {
             username: signup.newUsername.value,
             password: signup.newPassword.value,
             streaks: new Date(),
-            number_visited: 0})
+            repaying_favour: false,
+            seven_streaks: false,
+            fifty_streaks: false,
+            year_streaks: false,
+            prevbirthday: new Date(),
+            birthday: new Date(),
+            points: 0,
+            scum: false,
+            number_visited: 0}).then(docRef => {
+                console.log(docRef.id);
+                id = docRef.id;
+                setCookie("identification", id,2);
         console.log("submitted...");
         loggedIn = true;
         name = signup.newName.value;
@@ -135,8 +196,8 @@ signup.addEventListener('submit', (e) => {
         toggleVisibilitySignUp(document.getElementById("signup"),document.getElementById("signupform"));
         setCookie("name",name,2);
         setCookie("loggedIn", "true", 2);
-        setCookie("identification", id,2);
-        checkStreaks();
+        checkStreaks(); 
+        revealPoints();           })
         }
         else {
             console.log("ready: " + ready);
@@ -179,6 +240,7 @@ login.addEventListener("submit", (e) => {
                     setCookie("identification", id, 2);
                     counter = 1;
                     checkStreaks();
+                    revealPoints();
                 }
             })
         })
@@ -256,3 +318,106 @@ toggleVisibilitySignUp(document.getElementById("signup"),document.getElementById
 console.log(document.getElementById("title").innerHTML);
 console.log(document.getElementById("title").style.visibility);
 console.log(document.getElementById("title").style.display);
+
+document.getElementById("credit").addEventListener("click", e => {
+    if(loggedIn){
+        db.collection("users").doc(id).get().then(doc => {
+            
+    if(doc.data()["repaying_favour"] == false){
+    document.getElementById("a3").style.display = "block";
+    function hide() {document.getElementById("a3").style.display = "none";}
+    setTimeout(hide,8000);
+    db.collection('users').doc(id).update({
+    repaying_favour: true,
+    points: doc.data()["points"] + 30
+})
+
+}})}})
+
+if (loggedIn) {
+db.collection('users').doc(id).onSnapshot(snapshot => {
+    var changes = snapshot.docChanges();
+    console.log(changes);
+})}
+
+function revealPoints () {
+    if (loggedIn) {
+        db.collection('users').doc(id).get().then(doc => {
+            var points =  doc.data()["points"];
+            console.log("points: " + points);
+            document.getElementById("points").innerHTML = points + "pts<div id='buy_more' style='font-size: 10pt'>Buy More (coming soon)</div>";
+            var streaks = doc.data()["number_visited"];
+            document.getElementById("streaks").innerHTML = streaks;
+            document.getElementById("points").style.display = "block";
+            document.getElementById("streaks").style.display = "block";
+        });
+    }
+}
+
+if (document.getElementById("points").style.display == "block") {
+    buyMore();
+}
+
+function buyMore () {
+    document.getElementById("buy_more").addEventListener("click", e => {
+        e.preventDefault();
+        document.getElementById("buy_more").innerHTML = "coming soon!";
+        function changeBack () {document.getElementById("buy_more").innerHTML = "Buy More"}
+        setTimeout(changeBack, 6000);})}
+
+document.getElementById("sample-image4").addEventListener("click", e => {scum()});
+document.getElementById("figcaption4").addEventListener("click", e => {scum()});
+
+function scum() {
+    if (loggedIn) {
+        db.collection("users").doc(id).get().then(doc => {
+            document.getElementById("a10").style.display = "block";
+            function hide() {document.getElementById("a10").style.display = "none";}
+            setTimeout(hide,8000);
+            db.collection('users').doc(id).update({reuben: true});
+        })
+    }
+    else {
+        document.getElementById("a10").style.display = "block";
+            function hide() {document.getElementById("a10").style.display = "none";}
+            setTimeout(hide,8000);
+            setCookie("scum",true,1);
+    }
+}
+
+document.getElementById("sample-image5").addEventListener("click", e => {
+    if (loggedIn) {
+        db.collection("users").doc(id).get().then(doc => {
+            if (doc.data()["reuben"] == true) {
+                document.getElementById("a11").style.display = "block";
+                function hide() {document.getElementById("a11").style.display = "none";}
+                setTimeout(hide,8000);
+            }
+        })
+    }
+    else {
+        if (getCookie('scum')) {
+            document.getElementById("a11").style.display = "block";
+            function hide() {document.getElementById("a11").style.display = "none";}
+            setTimeout(hide,8000);
+        }
+    }
+})
+
+
+
+document.getElementById("title").addEventListener("click", e => 
+{
+    console.log("You scum!");
+    if(loggedIn){
+        db.collection("users").doc(id).get().then(doc => {
+            
+    if((doc.data()["scum"] == false) && (doc.data()["reuben"] == true)){
+    document.getElementById("a1").style.display = "block";
+    function hide() {document.getElementById("a1").style.display = "none";}
+    setTimeout(hide,8000);
+    db.collection('users').doc(id).update({
+    scum: true,
+    points: doc.data()["points"] + 20})
+    
+}})}})
