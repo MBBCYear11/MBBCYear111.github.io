@@ -338,3 +338,47 @@ footer {
   padding: 0px 10px;
   line-height: 40px;
 }
+#currentPage {
+  width: 60px;
+  height: 40px;
+  background-color: red;
+  padding: 13px 18px;
+}
+.achievement {
+  position: relative;
+  top: -108px;
+  left: 15px;
+  z-index: 100;
+  background-color: yellowgreen;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  display: block;
+  width: 300px;
+  height: 50px;
+  
+}
+
+#points {
+  position: absolute;
+  top: 80px;
+  right: 20px;
+  width: 200px;
+  height: 50px;
+  background-color: rgb(133, 66, 22);
+  z-index: 100;
+  font-size: 20px;
+}
+#streaks {
+  position: absolute;
+  top: 80px;
+  right: 240px;
+  border-radius: 25px;
+  background-image: url(Reuben.webp);
+  background-size: 20px 20px;
+  background-color: burlywood;
+  height: 50px;
+  width: 50px;
+  font-size: 30px;
+  overflow: hidden;
+}
