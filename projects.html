@@ -18,7 +18,8 @@ $_SESSION["id"] = null;*/
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Sofia" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css?family=Averia+Serif+Libre&display=swap" rel="stylesheet"> 
-        <title>Benjamin Tran</title>
+        <link href="https://fonts.googleapis.com/css?family=Mansalva&display=swap" rel="stylesheet"> 
+        <title>Benjamin Tran | Projects</title>
         <style type='text/css'>html{margin:0 !important ;}</style>
         <style>
                 .w3-left, .w3-right, .w3-badge {cursor:pointer}
@@ -41,18 +42,19 @@ $_SESSION["id"] = null;*/
             <ul>
             <li><a href="index.html" style="text-decoration: none; color: white;" class="hoverable">Home</a></li>
             <li><a href="about_me.html" style="text-decoration: none; color: white;" class="hoverable">About Me</a></li>
-            <li><a href="hunger_games.html" style="text-decoration: none; color: white;" class= "hoverable">Hunger Games</a></li>
+            <li><a href="hunger_games.html" style="text-decoration: none; color: white;" class= "hoverable">Empty Page</a></li>
             <li class="customform">
                     <div class="dropdown">
                             <button class="dropbtn"><a style="text-decoration: none;" id="currentPage">Projects</a>
                                 <i class="fa fa-caret-down"></i>
                             </button>
                             <div class="dropdown-content">
-                            <a href="projects.html#architecture">Architecture</a>
-                              <a href="projects.html#engineering">Engineering</a>
-                              <a href="projects.html#woodworking">Woodworking</a>
-                              <a href="projects.html#programming">Programming and Robotics</a>
-                              <a href="projects.html#science">Scientific Reports</a>
+                            <a href="architecture.html">Architecture</a>
+                              <a href="engineering.html">Engineering</a>
+                              <a href="woodworking.html">Woodworking</a>
+                              <a href="programming.html">Programming and Robotics</a>
+                              <a href="miscellaneous.html">Miscellaneous Miscellanea</a>
+                              <a href="member_benefits.html" id="member-benefits">Member Benefits</a>
                             </div>
                     </div>
             </li>
@@ -93,8 +95,8 @@ $_SESSION["id"] = null;*/
         <div class="achievement" style="display: none;" id="a5">20pts: On a roll! <p style="font-size: 12px;">Streaks for 7 days<p></div>
         <div class="achievement" style="display: none;" id="a6">20pts: Download Machine <p style="font-size: 12px;">Download 5 things<p></div>
         <div class="achievement" style="display: none;" id="a7">10pts: My Other Website<p style="font-size: 12px;">Click on the Hunger Games link<p></div>
-        <div class="achievement" style="display: none;" id="a8">100pts: Thank you, but... <p style="font-size: 12px;">Have streaks for 50 days<p></div>
-        <div class="achievement" style="display: none;" id="a9">1000pts: ...do you have a life?<p style="font-size: 12px;">Have streaks for 365 days<p></div>
+        <div class="achievement" style="display: none;" id="a8">600pts: Thank you, but... <p style="font-size: 12px;">Have streaks for 50 days<p></div>
+        <div class="achievement" style="display: none;" id="a9">7000pts: ...do you have a life?<p style="font-size: 12px;">Have streaks for 365 days<p></div>
         <div class="achievement" style="display: none;" id="a10">0pts: Don't taint my website with that scum!<p style="font-size: 12px;"><p></div>
         <div class="achievement" style="display: none;" id="a11">0pts: That's slightly better<p style="font-size: 12px;">But still not good</p></div>
         <div id="streaks" style="display:none;">2</div>
@@ -107,7 +109,7 @@ $_SESSION["id"] = null;*/
         </article>
         <main>
         <article  style="padding-top: 10px;">
-        <br><br><br><br><br><div id="architecture"><p>Architecture</p></div>
+        <br><br><br><br><br><div id="architecture"><p><a href="architecture.php">Architecture</a></p></div>
         <br><div id="engineering"><p>Engineering</p></div>
         <br><div id="woodworking"><p>Woodworking</P></div>
         <br><div id="programming"><p>Programming and Robotics</p></div>
