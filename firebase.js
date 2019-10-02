@@ -5,6 +5,66 @@ db.collection("users").get().then(function(snapshot){
         })
     })
 
+if (window.location.pathname == "/index.html" || window.location.pathname == '/C:/Users/benja/OneDrive%20-%20Moreton%20Bay%20Colleges(1)/Coding/New%20Website/index.php' || window.location.pathname == '/C:/Users/benja/OneDrive%20-%20Moreton%20Bay%20Colleges(1)/Coding/New%20Website/index.php') {
+document.getElementById("sample-image4").addEventListener("click", e => {scum()});
+document.getElementById("figcaption4").addEventListener("click", e => {scum()});
+document.getElementById("sample-image5").addEventListener("click", e => {
+    if (loggedIn) {
+        db.collection("users").doc(id).get().then(doc => {
+            if (doc.data()["reuben"] == true) {
+                document.getElementById("a11").style.display = "block";
+                function hide() {document.getElementById("a11").style.display = "none";}
+                setTimeout(hide,8000);
+            }
+        })
+    }
+    else { 
+        if (getCookie('scum')) {
+            document.getElementById("a11").style.display = "block";
+            function hide() {document.getElementById("a11").style.display = "none";}
+            setTimeout(hide,8000);
+        }
+    }
+})
+var days = Math.floor((((new Date()/1000)/3600)/24));
+console.log(days % 4);
+console.log(document.getElementById("slideshow-container"));
+switch (days % 4) {
+    case 0:
+        console.log("0");
+        document.getElementById("caption").innerHTML = "Slideshow of the Day: House";
+        document.getElementById("slideshow1").src = "House slideshow.png";
+        document.getElementById("slideshow2").src = "House slideshow2.png";
+        document.getElementById("slideshow3").src = "House slideshow3.png";
+        document.getElementById("slideshow4").src = "House slideshow4.png";
+        document.getElementById("slideshow5").src = "House slideshow5.png";
+        document.getElementById("slideshow6").src = "House slideshow6.png";
+        document.getElementById("slideshow7").src = "House slideshow7.png";
+        document.getElementById("slideshow8").src = "House slideshow8.png";
+            break;
+    case 1:
+            console.log("1");
+            console.log("yes");
+            document.getElementById("caption").innerHTML = "Slideshow of the Day: Granny Flat";
+            document.getElementById("slideshow1").src = "Flat slideshow.png";
+            document.getElementById("slideshow2").src = "Flat slideshow2.png";
+            document.getElementById("slideshow3").src = "Flat slideshow3.png";
+            document.getElementById("slideshow4").src = "Flat slideshow4.png";
+            document.getElementById("slideshow5").src = "Flat slideshow5.png";
+            document.getElementById("slideshow6").src = "Flat slideshow6.png";
+            document.getElementById("slideshow7").src = "Flat slideshow7.png";
+            document.getElementById("slideshow8").src = "Flat slideshow8.png";
+            break;
+    case 2:
+            console.log("2");
+            document.getElementById("caption").innerHTML = "Slideshow of the Day: Woodworking";
+            break;
+    case 3:
+            console.log("3");
+            document.getElementById("caption").innerHTML = "Slideshow of the Day: Programming";
+            break;
+}}
+
 function setCookie(cname, cvalue, exdays) {
         var d = new Date();
         d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -49,10 +109,23 @@ revealPoints();
         document.getElementById("username").value = "";
         toggleVisibilityLogin(document.getElementById("login"),document.getElementById("loginform"));
         toggleVisibilitySignUp(document.getElementById("signup"),document.getElementById("signupform"));
+        document.getElementById('member-benefits').style.display = "block";
        }
     //});
 window.addEventListener("load", (e) => {checkStreaks()});
-    
+window.addEventListener("load", (e) => {updatePurchases()});
+function updatePurchases () {
+    if (loggedIn) {
+        db.collection('users').doc(id).get().then( doc => {
+            if (doc.data()["granny_flat_benefit"]) {
+                document.getElementById("flat_purchase").innerHTML = "<a href=\"" + 'Subscription Granny Flat.zip' + "\" download>Download Here</a>"
+            }
+
+
+        })
+    }
+}
+
 function checkStreaks() {
     //console.log(loggedIn);
     if (loggedIn) {
@@ -61,30 +134,54 @@ function checkStreaks() {
     var number_visited = doc.data()["number_visited"];
     //console.log(previousDate);
     previousDate = new Date(previousDate);
-    //console.log(previousDate);
+    console.log(previousDate);
     //console.log(new Date());
     var previousYear = previousDate.getFullYear();
     var previousMonth = previousDate.getMonth();
     var previousDay = previousDate.getDate();
-    var currentYear = (new Date()).getFullYear();
-    var currentMonth = (new Date()).getMonth();
-    var currentDay = (new Date()).getDate();
-    if ((currentMonth == previousMonth) && (currentYear == previousYear) && ((previousDay + 1) == currentDay)) {
-        //console.log('added');
+    console.log("previous year" + previousYear);
+    console.log("previous month" + previousMonth);
+    console.log("previous day" + previousDay);
+    var d = new Date();
+    var e = d.setDate(d.getDate()-1);
+    var f = new Date(e);
+    console.log("f: " + f);
+    var yesterdayYear = f.getFullYear();
+    var yesterdayMonth = f.getMonth();
+    var yesterdayDay = f.getDate();
+    var Year =(new Date()).getFullYear();
+    var Month = (new Date()).getMonth();
+    var Day = (new Date()).getDate();
+    console.log(yesterdayYear);
+    console.log(yesterdayMonth);
+    console.log(yesterdayDay);
+    console.log("year" + Year);
+    console.log("month" + Month);
+    console.log("day" + Day);
+    console.log(Year == previousYear);
+    console.log(Month == previousMonth);
+    console.log(Day == previousDay);
+    if (yesterdayYear == previousYear && yesterdayMonth == previousMonth && yesterdayDay == previousDay) {
+        console.log('added');
         db.collection("users").doc(id).update({
             number_visited: number_visited + 1,
             streaks: new Date()
     })}
-    else if ((currentMonth == previousMonth) && (currentYear == previousYear) && ((previousDay) !== currentDay)) {
-        //console.log('reset');
-        db.collection("users").doc(id).update({
-            number_visited: 0,
-            streaks: new Date()
-        })
+    else if (Year == previousYear && Month == previousMonth && Day == previousDay) {
+        console.log('nothing');
     }
     else {
-        //console.log("nothing");
-    }
+        console.log("reset");
+            var streaks = doc.data()["number_visited"];
+            var current_points = doc.data()["points"];
+            console.log(streaks);
+        db.collection("users").doc(id).update({
+            number_visited: 0,
+            streaks: new Date(),
+            points: (((streaks - 1)**2 + (streaks - 1)) / 4) + current_points
+        })        }
+    
+    
     var num_streaks = doc.data()["number_visited"];
     var _bool = doc.data()["seven_streaks"];
     var _bool2 = doc.data()["fifty_streaks"];
@@ -107,7 +204,7 @@ function checkStreaks() {
         setTimeout(hide,8000);
         db.collection('users').doc(id).update({
         fifty_streaks: true,
-        points: doc.data()["points"] + 100 })
+        points: doc.data()["points"] + 600 })
     }
     if ((num_streaks == 365) && (_bool3 == false)) {
         document.getElementById("a9").style.display = "block";
@@ -115,7 +212,7 @@ function checkStreaks() {
         setTimeout(hide,8000);
         db.collection('users').doc(id).update({
         year_streaks: true,
-        points: doc.data()["points"] + 1000 })
+        points: doc.data()["points"] + 7000 })
     }
     var birthday = ((doc.data()["birthday"]["seconds"])*1000);
     var prevbirthday = (doc.data()["prevbirthday"]["seconds"])*1000;
@@ -127,7 +224,7 @@ function checkStreaks() {
     var birthdayYear = birthday.getFullYear();
     var birthdayMonth = birthday.getMonth();
     var birthdayDay = birthday.getDate();
-    if (birthdayYear !== currentYear && birthdayMonth == currentMonth && birthdayDay == currentDay && prevbirthdayYear !== currentYear) {
+    if (birthdayYear !== Year && birthdayMonth == Month && birthdayDay == Day && prevbirthdayYear !== Year) {
         document.getElementById("a4").style.display = "block";
         function hide() {document.getElementById("a4").style.display = "none";}
         setTimeout(hide,8000);
@@ -138,7 +235,7 @@ function checkStreaks() {
     })
     }
     else {
-        //console.log("not logged in");
+        console.log("not logged in");
     }
 }
 
@@ -147,25 +244,25 @@ const signup = document.querySelector("#signupform");
 signup.addEventListener('submit', (e) => {
     e.preventDefault();
     if (signup.newPassword.value === signup.confirmPassword.value) {
-        /*console.log(*/db.collection("users").where("username","==",signup.newUsername.value).get().then()//)
+        //console.log("first function")
         var counter = 0;
-        var domain = true;
-        var done = false;
         var outsideUsername = signup.newUsername.value;
+        //console.log(outsideUsername);
         db.collection('users').get().then((snapshot) => {
             snapshot.docs.forEach(doc => {
                 //console.log("Function 1 starts");
-                done = true;
-                data = doc.data()["name"];
+                data = doc.data()["username"];
+                //console.log(data);
                 if (data == outsideUsername) {
                     counter += 1; 
                     //console.log("counter: " + counter);
                 }
             })
-        })
-        //console.log("final counter: " + counter);
-        //console.log("Function 2 starts");
+        }).then(ifUsernameExists);
+        function ifUsernameExists() {
+            
         if (counter == 0) {
+            //console.log("ifUsernameExists");
         db.collection('users').add({
             name: signup.newName.value,
             username: signup.newUsername.value,
@@ -179,6 +276,7 @@ signup.addEventListener('submit', (e) => {
             birthday: new Date(),
             points: 0,
             scum: false,
+            granny_flat_benefit: false,
             number_visited: 0}).then(docRef => {
                 //console.log(docRef.id);
                 id = docRef.id;
@@ -192,19 +290,49 @@ signup.addEventListener('submit', (e) => {
         document.getElementById("newUsername").value = "";
         document.getElementById("confirmPassword").value = "";
         document.getElementById("newName").value = "";
-        toggleVisibilityLogin(document.getElementById("login"),document.getElementById("loginform"));
-        toggleVisibilitySignUp(document.getElementById("signup"),document.getElementById("signupform"));
+
+        function vis() {document.getElementById("newPassword").style.visibility = "";
+        document.getElementById("newPassword").value = "";}
+        function vis22() {document.getElementById("newUsername").style.visibility = "";
+        document.getElementById("newUsername").value = "";}
+        function vis3() {document.getElementById("newName").style.visibility = "";
+        document.getElementById("newName").value = "";}
+        function vis7() {document.getElementById("confirmPassword").style.visibility = "";
+        document.getElementById("confirmPassword").value = "";}
+        document.getElementById("nonmatchingpasswords").style.visibility = "";
+        document.getElementById("nonmatchingpasswords").style.display = "none";
+        document.getElementById("signupbutton").style.visibility = "";
+        setTimeout(vis7,100);
+        setTimeout(vis,200);
+        setTimeout(vis22,300);
+        setTimeout(vis3,400);
+
+        function vis2() {document.getElementById("username").style.visibility = "";document.getElementById("username").value="";}
+        function vis21() {document.getElementById("password").style.visibility = "";document.getElementById("password").value="";}
+        document.getElementById("incorrectusername").style.display = "none";
+        document.getElementById("incorrectusername").style.visibility = "";
+        document.getElementById("loginbutton").style.visibility = "";
+        setTimeout(vis2,200);
+        setTimeout(vis21,100);
+
         setCookie("name",name,2);
         setCookie("loggedIn", "true", 2);
         checkStreaks(); 
-        revealPoints();           })
+        revealPoints();
+        updatePurchases();
+        document.getElementById('member-benefits').style.display = "block";           })
         }
         else {
             //console.log("ready: " + ready);
             document.getElementById("nonmatchingpasswords").innerHTML = "Username already exists";
-        }
+            document.getElementById("nonmatchingpasswords").style.display = "";
+            document.getElementById("newUsername").value = "";
+            //document.getElementById("newPassword").value = "";
+            //document.getElementById("confirmPassword").value = "";
+        }}
     }
     else {document.getElementById("nonmatchingpasswords").innerHTML = "Passwords do not match";
+    document.getElementById("nonmatchingpasswords").style.display = "";
     document.getElementById("confirmPassword").value = "";
     document.getElementById("newPassword").value = "";
 }
@@ -221,6 +349,7 @@ login.addEventListener("submit", (e) => {
                 var localUsername = doc.data()["username"];
                 var localPassword = doc.data()["password"];
                 if ((localUsername == login.username.value) && (localPassword == login.password.value)) {
+                    counter = 1;
                     loggedIn = true;
                     name = doc.data()["name"];
                     //console.log(doc.data().id);
@@ -231,22 +360,51 @@ login.addEventListener("submit", (e) => {
                     document.getElementById("incorrectusername").innerHTML = "";
                     document.getElementById("password").value = "";
                     document.getElementById("username").value = "";
-                    toggleVisibilityLogin(document.getElementById("login"),document.getElementById("loginform"));
-                    toggleVisibilitySignUp(document.getElementById("signup"),document.getElementById("signupform"));
+
+                    function vis() {document.getElementById("newPassword").style.visibility = "";
+                    document.getElementById("newPassword").value = "";}
+                    function vis22() {document.getElementById("newUsername").style.visibility = "";
+                    document.getElementById("newUsername").value = "";}
+                    function vis3() {document.getElementById("newName").style.visibility = "";
+                    document.getElementById("newName").value = "";}
+                    function vis7() {document.getElementById("confirmPassword").style.visibility = "";
+                    document.getElementById("confirmPassword").value = "";}
+                    document.getElementById("nonmatchingpasswords").style.visibility = "";
+                    document.getElementById("nonmatchingpasswords").style.display = "none";
+                    document.getElementById("signupbutton").style.visibility = "";
+                    setTimeout(vis7,100);
+                    setTimeout(vis,200);
+                    setTimeout(vis22,300);
+                    setTimeout(vis3,400);
+
+                    function vis2() {document.getElementById("username").style.visibility = "";document.getElementById("username").value="";}
+                    function vis21() {document.getElementById("password").style.visibility = "";document.getElementById("password").value="";}
+                    document.getElementById("incorrectusername").style.display = "none";
+                    document.getElementById("incorrectusername").style.visibility = "";
+                    document.getElementById("loginbutton").style.visibility = "";
+                    setTimeout(vis2,200);
+                    setTimeout(vis21,100);
+
                     id = doc.id;
                     //console.log(id);
                     setCookie("name",name,2);
                     setCookie("loggedIn", "true", 2);
                     setCookie("identification", id, 2);
-                    counter = 1;
                     checkStreaks();
                     revealPoints();
+                    updatePurchases();
+                    document.getElementById('member-benefits').style.display = "block";
                 }
             })
-        })
+        }).then(incorrect);
         //console.log(counter);
-        if (counter === 0) {/*console.log("incorrect");*/ document.getElementById("incorrectusername").innerHTML = "Incorrect Username or Password";
-    }
+            /*console.log("incorrect");*/ 
+            function incorrect() {
+                if (counter === 0) {document.getElementById("incorrectusername").innerHTML = "Incorrect Username or Password";
+                document.getElementById("incorrectusername").style.display = "";
+                document.getElementById("password").value = "";
+            }}
+            //setTimeout(incorrect, 500);
     }
     checkLogin();
 })
@@ -259,8 +417,10 @@ function toggleVisibilityLogin(host, element1){
     //console.log(element1.visibility);
     if (document.getElementById("password").style.visibility == "visible") {
         //console.log("break 3");
-        function vis2() {document.getElementById("username").style.visibility = "";}
-        function vis21() {document.getElementById("password").style.visibility = "";}
+        function vis2() {document.getElementById("username").style.visibility = "";document.getElementById("username").value="";}
+        function vis21() {document.getElementById("password").style.visibility = "";document.getElementById("password").value="";}
+        document.getElementById("incorrectusername").style.display = "none";
+        document.getElementById("incorrectusername").style.visibility = "";
         document.getElementById("loginbutton").style.visibility = "";
         setTimeout(vis2,200);
         setTimeout(vis21,100);}
@@ -289,10 +449,16 @@ function toggleVisibilitySignUp(host, element1){
     if (host.innerHTML === "Logout.") {
         logout();}
     else if (document.getElementById("newPassword").style.visibility == "visible") {
-        function vis() {document.getElementById("newPassword").style.visibility = "";}
-        function vis2() {document.getElementById("newUsername").style.visibility = "";}
-        function vis3() {document.getElementById("newName").style.visibility = "";}
-        function vis7() {document.getElementById("confirmPassword").style.visibility = ""}
+        function vis() {document.getElementById("newPassword").style.visibility = "";
+        document.getElementById("newPassword").value = "";}
+        function vis2() {document.getElementById("newUsername").style.visibility = "";
+        document.getElementById("newUsername").value = "";}
+        function vis3() {document.getElementById("newName").style.visibility = "";
+        document.getElementById("newName").value = "";}
+        function vis7() {document.getElementById("confirmPassword").style.visibility = "";
+        document.getElementById("confirmPassword").value = "";}
+        document.getElementById("nonmatchingpasswords").style.visibility = "";
+        document.getElementById("nonmatchingpasswords").style.display = "none";
         document.getElementById("signupbutton").style.visibility = "";
         setTimeout(vis7,100);
         setTimeout(vis,200);
@@ -334,12 +500,6 @@ document.getElementById("credit").addEventListener("click", e => {
 
 }})}})
 
-if (loggedIn) {
-db.collection('users').doc(id).onSnapshot(snapshot => {
-    var changes = snapshot.docChanges();
-    //console.log(changes);
-})}
-
 function revealPoints () {
     if (loggedIn) {
         db.collection('users').doc(id).get().then(doc => {
@@ -354,7 +514,7 @@ function revealPoints () {
     }
 }
 
-if (document.getElementById("points").style.display == "block") {
+/*if (document.getElementById("points").style.display == "block") {
     buyMore();
 }
 
@@ -363,10 +523,8 @@ function buyMore () {
         e.preventDefault();
         document.getElementById("buy_more").innerHTML = "coming soon!";
         function changeBack () {document.getElementById("buy_more").innerHTML = "Buy More"}
-        setTimeout(changeBack, 6000);})}
+        setTimeout(changeBack, 6000);})}*/
 
-document.getElementById("sample-image4").addEventListener("click", e => {scum()});
-document.getElementById("figcaption4").addEventListener("click", e => {scum()});
 
 function scum() {
     if (loggedIn) {
@@ -385,24 +543,6 @@ function scum() {
     }
 }
 
-document.getElementById("sample-image5").addEventListener("click", e => {
-    if (loggedIn) {
-        db.collection("users").doc(id).get().then(doc => {
-            if (doc.data()["reuben"] == true) {
-                document.getElementById("a11").style.display = "block";
-                function hide() {document.getElementById("a11").style.display = "none";}
-                setTimeout(hide,8000);
-            }
-        })
-    }
-    else {
-        if (getCookie('scum')) {
-            document.getElementById("a11").style.display = "block";
-            function hide() {document.getElementById("a11").style.display = "none";}
-            setTimeout(hide,8000);
-        }
-    }
-})
 
 
 
@@ -422,16 +562,37 @@ document.getElementById("title").addEventListener("click", e =>
     
 }})}})
 
+function purchase(host, points_deducted, link) {
+    db.collection('users').doc(id).get().then( doc => {
+    if (points_deducted <= doc.data()["points"]) {
+        if (confirm("This process is irreversible. Are you sure you want to continue?"))
+        {document.getElementById(host).innerHTML = "<a href=\"" + link + "\" download>Download Here</a>";
+        db.collection('users').doc(id).update({
+            points: doc.data()["points"] - points_deducted,
+            granny_flat_benefit: true,
+        })}
+
+        }
+    })
+    }
+
+
 
 console.log(`Next patch fix:
-Stop multiple usernames that are the same
-Fix up spacing of login buttons, alerts
-Make sign up and login forms collapsed after login
-Add background image to streaks
-Make CSS more stable
 Smoother transitions for achievements
 Mobile
 Less loading time
 Security
-Finish other pages
 `);
+
+         db.collection('users').orderBy('name').onSnapshot(snapshot => {
+                let changes = snapshot.docChanges();
+                changes.forEach(change => {
+                    var points = change.doc.data()["points"];
+                    console.log(points);
+                     document.getElementById("points").innerHTML = points + "pts<div id='buy_more' style='font-size: 10pt'>Buy More (coming soon)</div>";
+                    var streaks = change.doc.data()["number_visited"];
+                    console.log(streaks);
+                    document.getElementById("streaks").innerHTML = streaks;
+                })
+         });
