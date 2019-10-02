@@ -27,14 +27,12 @@ color: darkred;
   position: fixed;
   background-color: rgb(255, 123, 0);
   z-index: 1;
-  width: 101%;
+  width: 100%;
   display: inline-block;
   text-align: center;
-  margin-left: -10pt;
   border-bottom: black solid 2pt;
   border-top: black solid 1pt;
   font-family: 'Trajan Pro', 'Times New Roman', serif;
-  clear: both;
   font-size: 14px;
   color: black;
   height: 192px;
@@ -175,11 +173,11 @@ text-align: center;
 
 #loginform {
 position: relative;
-top: 130px;
+top: /*130px;*/ 111.5px; /* altered */
 }
 #signupform {
 position: relative;
-top: 182px;
+top: /*182px;*/ 163.5px; /* altered */
 }
 main {
 visibility: visible;
@@ -187,22 +185,24 @@ visibility: visible;
 #incorrectusername {
   position: absolute;
   right: 500px;
-  top: 270px;
+  top: /*270px;*/ 200px; /* altered */
   z-index: 2;
   font-family: Trajan Pro;
   font-size: 10pt;
-  color: red;
+  color: maroon;
   font-weight: bold;
+  background-color: rgb(255, 123, 0);
 }
 #nonmatchingpasswords {
   position: absolute;
   right: 305px;
-  top: 320px;
+  top: 250px;
   z-index: 2;
   font-family: Trajan Pro;
   font-size: 10pt;
-  color: red;
+  color: maroon;
   font-weight: bold;
+  background-color: rgb(255, 123, 0);
 }
 main {
   position: relative;
@@ -216,8 +216,8 @@ main {
 }
 .slideshow-container {
   position: relative;
-  top: 10px;
-  left: 10px;
+  top: 8px;
+  left: 1%;
   width: 98%;
 }
 .caption {
@@ -347,6 +347,10 @@ footer {
 .achievement {
   position: relative;
   top: -108px;
+  transition: top 2s linear;
+  -webkit-transition: top 2s linear;
+  -moz-transition: top 2s linear;
+  -o-transition: top 2s linear;
   left: 15px;
   z-index: 100;
   background-color: yellowgreen;
@@ -356,29 +360,148 @@ footer {
   display: block;
   width: 300px;
   height: 50px;
-  
 }
 
 #points {
   position: absolute;
   top: 80px;
-  right: 20px;
-  width: 200px;
+  right: 1.302%;
+  width: 13.02%;
   height: 50px;
   background-color: rgb(133, 66, 22);
   z-index: 100;
   font-size: 20px;
+  overflow: hidden;
 }
 #streaks {
   position: absolute;
   top: 80px;
-  right: 240px;
+  right: 15.625%;
   border-radius: 25px;
-  background-image: url(Reuben.webp);
-  background-size: 20px 20px;
+  background-image: url(streaks.webp);
+  background-size: 100%;
   background-color: burlywood;
-  height: 50px;
-  width: 50px;
+  width: 3.255%;
   font-size: 30px;
   overflow: hidden;
+}
+.main_about {
+  height: 5000px;
+}
+.projects_main {
+  font-family: 'Bree Serif', 'Times New Roman', serif;
+  font-size: 14pt;
+}
+.projects_body {
+  font-family: 'PT Serif', 'Times New Roman', serif;
+  width: 100%;
+  position: relative;
+  z-index: 99;
+}
+.flat_images {
+  width: 33.333333333%;
+  display: inline-block;
+  position: relative;
+
+}
+.flat_images:nth-child(3) {
+  position: relative;
+  bottom: 80px;
+}
+
+.flat_images:nth-child(4) {
+  position: relative;
+  left: 33%;
+  bottom: 14px;
+  
+}
+.flat_images:nth-child(5) {
+  position: relative;
+  right: -33.3333333333%;
+  bottom: 386px;
+  
+}
+
+.flat_images:nth-child(6) {
+  position: relative;
+  right: -33%;
+  bottom: 35px;
+}
+
+.flat_images:nth-child(7) {
+  position: relative;
+  bottom: 490px;
+}
+
+.flat_images:nth-child(8) {
+  position: relative;
+  right: -33%;
+  bottom: 138px;
+}
+.flat_images:nth-child(9) {
+  position: relative;
+  bottom: 567px;
+}
+.flat_images:nth-child(10) {
+  position: relative;
+  bottom: 865px;
+  right: 0.33%;
+}
+
+.flat_images:nth-child(11) {
+  position: relative;
+  bottom: 1008px;
+  right: -33.333%;
+}
+.links {
+  position: relative;
+  bottom: 1000px;
+  z-index: 1000;
+  width: 25%;
+  font-family: 'PT Serif', 'Times New Roman', serif;
+}
+#projects_title {
+  text-align: center;
+  font-size: 30pt;
+  font-family: 'Lobster Two', cursive;
+  position: relative;
+  bottom: 20px;
+}
+.projects_main2 {
+  position: relative;
+  bottom: 970px;
+}
+.projects_secondary2 {
+  position: relative;
+  bottom: 970px;
+  font-family: 'PT Serif', 'Times New Roman', serif;
+}
+.house_images {
+  width: 33.33%;
+}
+.house_images:nth-child(3) {
+  position: relative;
+  bottom: 1000px;
+}
+.house_images:nth-child(4) {
+  position: relative;
+  bottom: 975px;
+  right: 0.33%;
+}
+.house_images:nth-child(5) {
+  position: relative;
+  bottom: 1354px;
+  left: 66.66%;
+}
+.house_images:nth-child(6) {
+  position: relative;
+  bottom: 1025px;
+  right: 33.666%;
+}
+#member-benefits {
+  display: none;
+}
+.package {
+  background-color: rgba(255,0,0,0.5);
+  margin: 10px 10px;
 }
