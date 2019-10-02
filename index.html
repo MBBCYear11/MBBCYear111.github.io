@@ -1,3 +1,11 @@
+<?php 
+/*$MyPHPNumVar = 10;
+$MyPHPStringVar = "Ten";
+session_start();
+$_SESSION["loggedIn"] = false;
+$_SESSION["name"] = "";
+$_SESSION["id"] = null;*/
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,7 +18,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Sofia" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css?family=Averia+Serif+Libre&display=swap" rel="stylesheet"> 
-        <title>Benjamin Tran</title>
+        <link href="https://fonts.googleapis.com/css?family=Mansalva&display=swap" rel="stylesheet"> 
+        <title>Benjamin Tran | Homepage</title>
         <style type='text/css'>html{margin:0 !important ;}</style>
         <style>
                 .w3-left, .w3-right, .w3-badge {cursor:pointer}
@@ -32,36 +41,37 @@
             <ul>
             <li><a href="index.html" style="text-decoration: none; color: white;" id="currentPage" class="hoverable">Home</a></li>
             <li><a href="about_me.html" style="text-decoration: none; color: white;" class="hoverable">About Me</a></li>
-            <li><a href="hunger_games.html" style="text-decoration: none; color: white;" class= "hoverable">Hunger Games</a></li>
+            <li><a href="hunger_games.html" style="text-decoration: none; color: white;" class= "hoverable">Empty Page</a></li>
             <li class="customform">
                     <div class="dropdown">
                             <button class="dropbtn"><a style="text-decoration: none;">Projects</a>
                                 <i class="fa fa-caret-down"></i>
                             </button>
                             <div class="dropdown-content">
-                            <a href="projects.html#architecture">Architecture</a>
-                              <a href="projects.html#engineering">Engineering</a>
-                              <a href="projects.html#woodworking">Woodworking</a>
-                              <a href="projects.html#programming">Programming and Robotics</a>
-                              <a href="projects.html#science">Scientific Reports</a>
+                            <a href="architecture.html">Architecture</a>
+                              <a href="engineering.html">Engineering</a>
+                              <a href="woodworking.html">Woodworking</a>
+                              <a href="programming.html">Programming and Robotics</a>
+                              <a href="miscellaneous.html">Miscellaneous Miscellanea</a>
+                              <a href="member_benefits.html" id="member-benefits">Member Benefits</a>
                             </div>
                     </div>
             </li>
             <li>
             <div id="logging-on">
                               <form id="loginform" action="" style="visibility: hidden;" method="POST">
-                                  <input id="username" class="verification" type="text" placeholder="Username" name="username" required>
-                                  <input id="password" class="verification" type="password" placeholder="Password" name="password" required>
+                                  <input id="username" class="verification" type="text" placeholder="Username" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" name="username" required/>
+                                  <input id="password" class="verification" type="password" placeholder="Password" autocorrect="off" name="password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" required/>
                                   <input type="submit" value="Login" id="loginbutton">
                               </form>
                               <a style="text-decoration: none; color: white;" id="login" href="" class="hoverable">Login</a></li>
                               <li>
             <div id="signing-up">
                               <form id="signupform" style="visibility: hidden;" method="POST">
-                                  <input id="newName" class="verification" type="text" placeholder="Name" name="newName" required>
-                                  <input id="newUsername" class="verification" type="text" placeholder="Username" name="newUsername" required>
-                                  <input id="newPassword" class="verification" type="password" placeholder="Password" name="newPassword" required>
-                                  <input id="confirmPassword" class="verification" type="password" placeholder="Confirm Password" name="confirmPassword" required>
+                                  <input id="newName" class="verification" type="text" placeholder="Name" name="newName"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" required>
+                                  <input id="newUsername" class="verification" type="text" placeholder="Username" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"name="newUsername" required>
+                                  <input id="newPassword" class="verification" type="password" placeholder="Password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"name="newPassword" required>
+                                  <input id="confirmPassword" class="verification" type="password" placeholder="Confirm Password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"name="confirmPassword" required>
                                   <input type="submit" value="signup" id="signupbutton">
                               </form></div><a href="" style="text-decoration: none; color: white;" id="signup" class="hoverable">Sign Up</a></li>
 
@@ -84,8 +94,8 @@
         <div class="achievement" style="display: none;" id="a5">20pts: On a roll! <p style="font-size: 12px;">Streaks for 7 days<p></div>
         <div class="achievement" style="display: none;" id="a6">20pts: Download Machine <p style="font-size: 12px;">Download 5 things<p></div>
         <div class="achievement" style="display: none;" id="a7">10pts: My Other Website<p style="font-size: 12px;">Click on the Hunger Games link<p></div>
-        <div class="achievement" style="display: none;" id="a8">100pts: Thank you, but... <p style="font-size: 12px;">Have streaks for 50 days<p></div>
-        <div class="achievement" style="display: none;" id="a9">1000pts: ...do you have a life?<p style="font-size: 12px;">Have streaks for 365 days<p></div>
+        <div class="achievement" style="display: none;" id="a8">600pts: Thank you, but... <p style="font-size: 12px;">Have streaks for 50 days<p></div>
+        <div class="achievement" style="display: none;" id="a9">7000pts: ...do you have a life?<p style="font-size: 12px;">Have streaks for 365 days<p></div>
         <div class="achievement" style="display: none;" id="a10">0pts: Don't taint my website with that scum!<p style="font-size: 12px;"><p></div>
         <div class="achievement" style="display: none;" id="a11">0pts: That's slightly better<p style="font-size: 12px;">But still not good</p></div>
         <div id="streaks" style="display:none;">2</div>
@@ -98,14 +108,18 @@
         </article>
         <main>
         <article>
-        <div class="slideshow-container">
-                    <div><img class="mySlides w3-animate-left" src="House slideshow.png" width="100%" height="600"></div>
-                    <div><img class="mySlides w3-animate-left" src="House slideshow2.png" width="100%" height="600"></div>
-                    <div><img class="mySlides w3-animate-left" src="House slideshow3.png" width="100%" height="600"></div>
-                    <div><img class="mySlides w3-animate-left" src="House slideshow4.png" width="100%" height="600"></div>
+        <div class="slideshow-container" id="slideshow-container">
+                    <div><img class="mySlides w3-animate-left" id="slideshow1" src="House slideshow.png" width="100%" height="600px"></div>
+                    <div><img class="mySlides w3-animate-left" id="slideshow2" src="House slideshow2.png" width="100%" height="600px"></div>
+                    <div><img class="mySlides w3-animate-left" id="slideshow3" src="House slideshow3.png" width="100%" height="600px"></div>
+                    <div><img class="mySlides w3-animate-left" id="slideshow4" src="House slideshow4.png" width="100%" height="600px"></div>
+                    <div><img class="mySlides w3-animate-left" id="slideshow5" src="House slideshow.png" width="100%" height="600px"></div>
+                    <div><img class="mySlides w3-animate-left" id="slideshow6" src="House slideshow2.png" width="100%" height="600px"></div>
+                    <div><img class="mySlides w3-animate-left" id="slideshow7" src="House slideshow3.png" width="100%" height="600px"></div>
+                    <div><img class="mySlides w3-animate-left" id="slideshow8" src="House slideshow4.png" width="100%" height="600px"></div>
                     <button class="w3-button w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
                     <button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button>
-                    <h3 class="caption">Slideshow of the Day: House</h3>
+                    <h3 class="caption" id="caption">Slideshow of the Day: House</h3>
             </div>
             <script>
 var slideIndex = 0;
