@@ -28,7 +28,6 @@ color: darkred;
   background-color: rgb(255, 123, 0);
   z-index: 1;
   width: 100%;
-  display: inline-block;
   text-align: center;
   border-bottom: black solid 2pt;
   border-top: black solid 1pt;
@@ -37,25 +36,28 @@ color: darkred;
   color: black;
   height: 192px;
 }
+.header ul {
+  width: 99%;
+  position: relative;
+  left: 0.5%;
+  padding: none;
+  margin: none;
+}
 .header li {
   display: inline-block;
-  width: 14.2857%;
+  width: 13.5%;
   text-align: center;
   position:relative;
-  right: 200px;
   top: /*0px;*/ 14px; /* altered */
 }
-.customform {
-position: relative;
-left: -140px;
-}
+
 .currentPage{
   font-weight: bold;
   font-size: 17pt;
 }
 
 .dropdown {
-  float: left;
+  float: center;
   overflow: visible;
   height: 27px;
 }
@@ -70,6 +72,7 @@ left: -140px;
   font-family: inherit;
   margin: 0;
   line-height: 15px;
+  float: center;
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn {
@@ -83,6 +86,7 @@ left: -140px;
   opacity: 0.9;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  float: left;
 }
 
 .dropdown-content a {
@@ -107,36 +111,40 @@ left: -140px;
   background-color: #ddd;
   color: black;
 }
-
+.topnav {
+  overflow: hidden;
+  width: 14%;
+}
 .topnav .search-container {
-  float: right;
   height: 15px;
+  width: 14%;
 }
 
 .topnav input[type=text] {
   font-size: 15px;
   border: none;
   position: relative;
-  bottom: /*25px;*/ 10px; /* altered */
+  top: 32.5px;
 }
 
 .topnav .search-container button {
-  float: right;
-  padding: 4.8px 10px;
+  float: left;
+  padding: 4.8px 39%;
   margin-top: 8px;
-  margin-right: 16px;
   background: #ddd;
   font-size: /*15px;*/ 10px; /* altered */
   border: none;
   cursor: pointer;
   position: relative;
-  bottom: /*33px;*/ 18px; /* altered */
+  left: 606%;
 }
 
 .topnav .search-container button:hover {
   background: #ccc;
 }
-
+.fa-search {
+  padding: 10% 10%;
+}
 @media screen and (max-width: 600px) {
   .topnav .search-container {
     float: none;
@@ -150,7 +158,7 @@ left: -140px;
     padding: 14px;
   }
   .topnav input[type=text] {
-    border: 1px solid #ccc;  
+    border: 1px solid #ccc; 
   }
 }
 
@@ -165,10 +173,6 @@ height: 40px;
 background-color: red;
 padding: 13px 18px;
 
-}
-header ul li {
-width: 14.2857%;
-text-align: center;
 }
 
 #loginform {
