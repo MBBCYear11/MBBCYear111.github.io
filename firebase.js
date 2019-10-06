@@ -4,8 +4,8 @@ db.collection("users").get().then(function(snapshot){
         //name = console.log(doc.data()["name"]);
         })
     })
-
-if (window.location.pathname == "/index.html" || window.location.pathname == '/C:/Users/benja/OneDrive%20-%20Moreton%20Bay%20Colleges(1)/Coding/New%20Website/index.php' || window.location.pathname == '/C:/Users/benja/OneDrive%20-%20Moreton%20Bay%20Colleges(1)/Coding/New%20Website/index.php') {
+countDownloads();
+if (location.title == "Benjamin Tran | Homepage") {
 document.getElementById("sample-image4").addEventListener("click", e => {scum()});
 document.getElementById("figcaption4").addEventListener("click", e => {scum()});
 document.getElementById("sample-image5").addEventListener("click", e => {
@@ -118,8 +118,9 @@ function updatePurchases () {
     if (loggedIn) {
         db.collection('users').doc(id).get().then( doc => {
             if (doc.data()["granny_flat_benefit"]) {
-                document.getElementById("flat_purchase").innerHTML = "<a href=\"" + 'Subscription Granny Flat.zip' + "\" download>Download Here</a>"
-            }
+                if (document.title == "Benjamin Tran | Projects | Member Benefits") {
+                document.getElementById("flat_purchase").innerHTML = "<a href=\"" + 'Subscription Granny Flat.zip' + "\" download>Download Here</a>";
+            }}
 
 
         })
@@ -277,6 +278,7 @@ signup.addEventListener('submit', (e) => {
             points: 0,
             scum: false,
             granny_flat_benefit: false,
+            five_downloads: false,
             number_visited: 0}).then(docRef => {
                 //console.log(docRef.id);
                 id = docRef.id;
@@ -320,6 +322,7 @@ signup.addEventListener('submit', (e) => {
         checkStreaks(); 
         revealPoints();
         updatePurchases();
+        overlaps();
         document.getElementById('member-benefits').style.display = "block";           })
         }
         else {
@@ -393,6 +396,7 @@ login.addEventListener("submit", (e) => {
                     checkStreaks();
                     revealPoints();
                     updatePurchases();
+                    overlaps();
                     document.getElementById('member-benefits').style.display = "block";
                 }
             })
@@ -596,3 +600,52 @@ Security
                     document.getElementById("streaks").innerHTML = streaks;
                 })
          });
+
+         function countDownloads() {
+            console.log("firstFunction");
+            if (loggedIn) {
+            var iterator = 0;
+            var check;
+            var points;
+            db.collection('users').doc(id).get().then(doc => {
+                console.log("halfFunction");
+                check = doc.data()["five_downloads"];
+                points = doc.data()["points"];
+                if (doc.data()["granny_flat_benefit"] == true) {iterator ++;}
+            }).then(followFunction)
+        function followFunction() {
+            console.log('followFunction');
+        if (iterator == 1 && check == false) {
+            console.log('passed');
+            db.collection('users').doc(id).update({
+                five_downloads: true,
+                points: points + 20
+            });
+            document.getElementById("a6").style.display = "block";
+            function hide() {document.getElementById("a6").style.display = "none";}
+            setTimeout(hide,8000)
+        }
+    
+        }}
+        }
+
+window.addEventListener('load', e => {overlaps()});
+window.addEventListener('resize', e => {
+    overlaps();
+})
+
+function overlaps() {
+    console.log('resize');
+
+    if ((document.getElementById('title').getBoundingClientRect().right * 0.99) > document.getElementById('streaks').getBoundingClientRect().left) {
+        console.log('overlapping');
+        document.getElementById("streaks").style.visibility = "hidden";
+    }
+    else {
+        console.log("unoverlapping");
+        document.getElementById("streaks").style.visibility = "visible";}
+    if ((document.getElementById('title').getBoundingClientRect().right * 0.99) > document.getElementById('points').getBoundingClientRect().left) {document.getElementById('points').style.visibility = "hidden";}
+    else {
+        document.getElementById('points').style.visibility = "visible";
+    }
+}
