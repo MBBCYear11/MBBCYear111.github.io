@@ -1,9 +1,4 @@
-db.collection("users").get().then(function(snapshot){
-    snapshot.docs.forEach(function(doc){
-        //console.log(doc.data());
-        //name = console.log(doc.data()["name"]);
-        })
-    })
+
 countDownloads();
 if (location.title == "Benjamin Tran | Homepage") {
 document.getElementById("sample-image4").addEventListener("click", e => {scum()});
@@ -98,6 +93,9 @@ else {
     var name = "";
     var id = "";
 }
+
+loggedIn ? document.getElementById('title').style.overflow = "hidden" : document.getElementById('title').style.overflow = "visible";
+
 revealPoints();
 //window.addEventListener("load",(e) => {
     if (name) {
@@ -323,6 +321,7 @@ signup.addEventListener('submit', (e) => {
         revealPoints();
         updatePurchases();
         overlaps();
+        loggedIn ? document.getElementById('title').style.overflow = "hidden" : document.getElementById('title').style.overflow = "visible";
         document.getElementById('member-benefits').style.display = "block";           })
         }
         else {
@@ -397,6 +396,7 @@ login.addEventListener("submit", (e) => {
                     revealPoints();
                     updatePurchases();
                     overlaps();
+                    loggedIn ? document.getElementById('title').style.overflow = "hidden" : document.getElementById('title').style.overflow = "visible";
                     document.getElementById('member-benefits').style.display = "block";
                 }
             })
@@ -636,7 +636,7 @@ window.addEventListener('resize', e => {
 
 function overlaps() {
     console.log('resize');
-
+    if (loggedIn) {
     if ((document.getElementById('title').getBoundingClientRect().right * 0.99) > document.getElementById('streaks').getBoundingClientRect().left) {
         console.log('overlapping');
         document.getElementById("streaks").style.visibility = "hidden";
@@ -644,8 +644,35 @@ function overlaps() {
     else {
         console.log("unoverlapping");
         document.getElementById("streaks").style.visibility = "visible";}
-    if ((document.getElementById('title').getBoundingClientRect().right * 0.99) > document.getElementById('points').getBoundingClientRect().left) {document.getElementById('points').style.visibility = "hidden";}
+    if ((document.getElementById('title').getBoundingClientRect().right * 0.99) > document.getElementById('points').getBoundingClientRect().left) {
+            document.getElementById('points').style.visibility = "hidden";
+            document.getElementById('title').style.overflow = "visible";
+            //document.getElementById('title').clientWidth = "98%";
+            //document.getElementById('title').style.left = "1%";
+}
     else {
         document.getElementById('points').style.visibility = "visible";
+        //document.getElementById('title').style.overflow = "hidden";
+        //document.getElementById('title').style.left = "25%";
+    }}
+    else {
+        var edge = document.getElementById('title').scrollWidth;
+        var element = document.getElementById('title');
+        console.log("scrollWidth: " + element.scrollWidth);
+        console.log("clientWidth: " + element.clientWidth);
+        console.log("offsetWidth: " + element.offsetWidth);
+        console.log("scrollWidth2: " + element.getBoundingClientRect().right);
+        var window1 = window.innerWidth;
+        console.log('edge: ' + edge);
+        console.log('window1: ' + window1);
+        if (edge > element.getBoundingClientRect().right) {
+            console.log("blah blah blah");
+            element.style.left = "1%";
+
+        }
+        else {
+            console.log("unblah unblah unblah");
+            element.style.left = "20%";
+        }
     }
 }
