@@ -149,6 +149,9 @@ function carousel() {
   slideIndex++;
   if (slideIndex > x.length) {slideIndex = 1}
   x[slideIndex-1].style.display = "block";
+      var event = new Event('resize');
+  window.addEventListener(event, changeSlides(),false);
+  window.dispatchEvent(event);
   setTimeout(carousel, 8000); // Change image every 2 seconds
 }
                     </script>
