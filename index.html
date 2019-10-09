@@ -126,7 +126,20 @@ var slideIndex = 0;
 function plusDivs(n) {
   showDivs(slideIndex += n)}
 carousel();
+function changeSlides() {
+    document.getElementById('slideshow-container').style.height = (document.getElementById('slideshow-container').clientWidth * (660/1000)) + "px";
+    console.log('ratio: ' + parseInt((document.getElementById('slideshow-container').style.height).slice(0,-2))/ document.getElementById('slideshow-container').clientWidth);
+    document.getElementById('slideshow-container');
+    document.getElementById('slideshow-container').clientHeight;
 
+    for (i = 1; i < 9; i++) {
+        console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii: ' + i);
+        var element = document.getElementById("slideshow" + i);
+        console.log(element);
+        element.style.height = element.width * (600/1000) + "px";
+        console.log(element.style.height);
+    }
+    }
 function carousel() {
   var i;
   var x = document.getElementsByClassName("mySlides");
