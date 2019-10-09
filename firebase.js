@@ -1,6 +1,13 @@
+document.getElementById('slideshow-container').style.height = "660px";
+db.collection("users").get().then(function(snapshot){
+    snapshot.docs.forEach(function(doc){
+        //console.log(doc.data());
+        //name = console.log(doc.data()["name"]);
+        })
+    })
 
 countDownloads();
-if (location.title == "Benjamin Tran | Homepage") {
+if (document.title == "Benjamin Tran | Homepage") {
 document.getElementById("sample-image4").addEventListener("click", e => {scum()});
 document.getElementById("figcaption4").addEventListener("click", e => {scum()});
 document.getElementById("sample-image5").addEventListener("click", e => {
@@ -277,6 +284,7 @@ signup.addEventListener('submit', (e) => {
             scum: false,
             granny_flat_benefit: false,
             five_downloads: false,
+            hunger_games: false,
             number_visited: 0}).then(docRef => {
                 //console.log(docRef.id);
                 id = docRef.id;
@@ -322,7 +330,14 @@ signup.addEventListener('submit', (e) => {
         updatePurchases();
         overlaps();
         loggedIn ? document.getElementById('title').style.overflow = "hidden" : document.getElementById('title').style.overflow = "visible";
-        document.getElementById('member-benefits').style.display = "block";           })
+        document.getElementById('member-benefits').style.display = "block";           
+        document.getElementById("a2").style.display = "block";
+        function hide() {document.getElementById("a2").style.display = "none";}
+        setTimeout(hide,8000);
+        db.collection('users').doc(id).update({
+        points: doc.data()["points"] + 40
+    })
+    })
         }
         else {
             //console.log("ready: " + ready);
@@ -540,6 +555,7 @@ function scum() {
         })
     }
     else {
+        console.log("scum scum scum");
         document.getElementById("a10").style.display = "block";
             function hide() {document.getElementById("a10").style.display = "none";}
             setTimeout(hide,8000);
@@ -628,22 +644,27 @@ Security
     
         }}
         }
-
 window.addEventListener('load', e => {overlaps()});
-window.addEventListener('resize', e => {
-    overlaps();
-})
+window.addEventListener('resize', e => {overlaps();});
 
 function overlaps() {
     console.log('resize');
     if (loggedIn) {
+        document.getElementById('streaks').style.display = "inline-block";
+        document.getElementById('points').style.display = "inline-block";
+        console.log('intermediary');
+        console.log(document.getElementById('title').getBoundingClientRect().right * 0.99);
+        console.log(document.getElementById('streaks'));
+        console.log((document.getElementById('title').getBoundingClientRect().right * 0.99) > document.getElementById('streaks').getBoundingClientRect().left);
+        console.log('intermediary 2');
     if ((document.getElementById('title').getBoundingClientRect().right * 0.99) > document.getElementById('streaks').getBoundingClientRect().left) {
         console.log('overlapping');
         document.getElementById("streaks").style.visibility = "hidden";
     }
     else {
         console.log("unoverlapping");
-        document.getElementById("streaks").style.visibility = "visible";}
+        document.getElementById("streaks").style.visibility = "visible";
+    }
     if ((document.getElementById('title').getBoundingClientRect().right * 0.99) > document.getElementById('points').getBoundingClientRect().left) {
             document.getElementById('points').style.visibility = "hidden";
             document.getElementById('title').style.overflow = "visible";
@@ -651,6 +672,7 @@ function overlaps() {
             //document.getElementById('title').style.left = "1%";
 }
     else {
+        console.log('unoverlapping2');
         document.getElementById('points').style.visibility = "visible";
         //document.getElementById('title').style.overflow = "hidden";
         //document.getElementById('title').style.left = "25%";
@@ -675,4 +697,76 @@ function overlaps() {
             element.style.left = "20%";
         }
     }
+    changeSlides();
+    function changeSlides() {
+    document.getElementById('slideshow-container').style.height = (document.getElementById('slideshow-container').clientWidth * (660/1000)) + "px";
+    console.log('ratio: ' + parseInt((document.getElementById('slideshow-container').style.height).slice(0,-2))/ document.getElementById('slideshow-container').clientWidth);
+    document.getElementById('slideshow-container');
+    document.getElementById('slideshow-container').clientHeight;
+
+    for (i = 1; i < 9; i++) {
+        console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii: ' + i);
+        var element = document.getElementById("slideshow" + i);
+        console.log(element);
+        element.style.height = element.width * (600/1000) + "px";
+        console.log(element.style.height);
+    }
+    }
 }
+
+function pauseBefore(e) {
+    e.preventDefault();
+
+}
+document.getElementById('sample-image4').addEventListener("click", e => {
+    e.preventDefault();
+    function f1() {window.open("https://rooster202.github.io","_blank");}
+    setTimeout(f1,2000);
+});
+document.getElementById('figcaption4').addEventListener("click", e => {
+    e.preventDefault();
+    function f1() {window.open("https://rooster202.github.io","_blank");}
+    setTimeout(f1,2000);
+});
+document.getElementById('sample-image5').addEventListener("click", e => {
+    e.preventDefault();
+    function f1() {window.open("https://nebrok.github.io","_blank");}
+    setTimeout(f1,2000);
+});
+
+document.getElementById('sample-image5').addEventListener("click", e => {
+    e.preventDefault();
+    function f1() {window.open("https://nebrok.github.io","_blank");}
+    setTimeout(f1,2000);
+});
+
+
+            db.collection('users').doc(id).get().then(doc => {
+                document.getElementById('sample-image3').addEventListener('click', e=> {e.preventDefault();
+                if (!doc.data()["hunger_games"]) {
+                        document.getElementById("a7").style.display = "block";
+                                    function hide() {document.getElementById("a7").style.display = "none";}
+                                    setTimeout(hide,8000);
+                var num = doc.data()["points"];
+                console.log(num);
+            db.collection('users').doc(id).update({
+                points: num + 10,
+                hunger_games: true
+            });
+            function f2() {window.open("https://rooster202.github.io/hunger_games","_blank");}
+            setTimeout(f2,2000);
+            }
+        else {
+            window.open('https://rooster202.github.io/hunger_games','_blank');
+        }})
+        })
+
+
+//window.addEventListener('load', makePercentages());
+//window.addEventListener('resize', makePercentages());
+        function makePercentages() {
+            document.getElementById('sample-image1').style.left = window.innerWidth * (10/1550);
+            document.getElementById('figcaption1').style.left = window.innerWidth * (10/1550);
+            document.getElementById('sample-image2').style.left = window.innerWidth * (10/1550);
+            document.getElementById('figcaption2').style.left = window.innerWidth * (10/1550)
+        }
