@@ -224,11 +224,12 @@ main {
   background-color: rgba(190, 184, 184, 0.699);
   height: 2000px;
 }
-.slideshow-container {
+#slideshow-container {
   position: relative;
   top: 8px;
   left: 1%;
   width: 98%;
+  height: 660px;
 }
 .caption {
   font-family: 'Averia Serif Libre', cursive;
@@ -241,7 +242,7 @@ main {
 }
 .main {
   position: relative;
-  left: 10px;
+  left: 1%;
   width: 98%;
 }
 #list-no-login {
@@ -263,18 +264,18 @@ main {
 }
 #p1 {
   position: relative;
-  left: 10px;
+  left: 1%;
   top: -320px;
 }
 #sample-image1 {
   width: 48%;
   position: relative;
-  left: 10px;
+  left: 1%;
   top: -320px;
 }
 #figcaption1 {
   position: relative;
-  left: 10px;
+  left: 1%;
   bottom: 320px;
   font-size: 14px;
   font-family: 'Averia Serif Libre', cursive;
@@ -286,7 +287,7 @@ main {
 #sample-image2 {
   width: 48%;
   position: relative;
-  left: 10px;
+  left: 1.00645161290322580645161290322581%;
   top: -310px;
 }
 #figcaption2 {
@@ -370,6 +371,7 @@ footer {
   display: block;
   width: 300px;
   height: 50px;
+  z-index: 200;
 }
 
 #points {
