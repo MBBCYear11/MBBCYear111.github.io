@@ -1,11 +1,3 @@
-<?php 
-/*$MyPHPNumVar = 10;
-$MyPHPStringVar = "Ten";
-session_start();
-$_SESSION["loggedIn"] = false;
-$_SESSION["name"] = "";
-$_SESSION["id"] = null;*/
-?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -74,10 +66,6 @@ $_SESSION["id"] = null;*/
                                   <input id="confirmPassword" class="verification" type="password" placeholder="Confirm Password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"name="confirmPassword" required>
                                   <input type="submit" value="signup" id="signupbutton">
                               </form></div><a href="" style="text-decoration: none; color: white;" id="signup" class="hoverable">Sign Up</a></li>
-
-
-
-
             <li class="topnav">
                     <div class="search-container">
                       <form action="/action_page.php">
@@ -117,8 +105,8 @@ $_SESSION["id"] = null;*/
                     <div><img class="mySlides w3-animate-left" id="slideshow6" src="House slideshow2.png" width="100%" height="600px"></div>
                     <div><img class="mySlides w3-animate-left" id="slideshow7" src="House slideshow3.png" width="100%" height="600px"></div>
                     <div><img class="mySlides w3-animate-left" id="slideshow8" src="House slideshow4.png" width="100%" height="600px"></div>
-                    <button class="w3-button w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-                    <button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button>
+                    <button class="w3-button w3-display-left" onclick='plusDivs(-1)'>&#10094;</button>
+                    <button class="w3-button w3-display-right" onclick='plusDivs(+1)'>&#10095;</button>
                     <h3 class="caption" id="caption">Slideshow of the Day: House</h3>
             </div>
             <script>
@@ -128,18 +116,30 @@ function plusDivs(n) {
 carousel();
 function changeSlides() {
     document.getElementById('slideshow-container').style.height = (document.getElementById('slideshow-container').clientWidth * (660/1000)) + "px";
-    console.log('ratio: ' + parseInt((document.getElementById('slideshow-container').style.height).slice(0,-2))/ document.getElementById('slideshow-container').clientWidth);
+    //console.log('ratio: ' + parseInt((document.getElementById('slideshow-container').style.height).slice(0,-2))/ document.getElementById('slideshow-container').clientWidth);
     document.getElementById('slideshow-container');
     document.getElementById('slideshow-container').clientHeight;
 
     for (i = 1; i < 9; i++) {
-        console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii: ' + i);
+        //console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii: ' + i);
         var element = document.getElementById("slideshow" + i);
-        console.log(element);
+        //console.log(element);
         element.style.height = element.width * (600/1000) + "px";
-        console.log(element.style.height);
+        //console.log(element.style.height);
     }
     }
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length} ;
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  changeSlides();
+  x[slideIndex-1].style.display = "block";
+  changeSlides();
+}
 function carousel() {
   var i;
   var x = document.getElementsByClassName("mySlides");
@@ -149,14 +149,14 @@ function carousel() {
   slideIndex++;
   if (slideIndex > x.length) {slideIndex = 1}
   x[slideIndex-1].style.display = "block";
-      var event = new Event('resize');
+  var event = new Event('resize');
   window.addEventListener(event, changeSlides(),false);
   window.dispatchEvent(event);
   setTimeout(carousel, 8000); // Change image every 2 seconds
 }
                     </script>
         </article>
-        <article class="main">
+        <article class="main" id="main">
           Welcome to my website. This is where I showcase all of my projects, from architecture to programming to other websites. This website is home to many resources, including downloadable CAD files and programs. Each day, a montage is displayed in the slideshow of the day, giving you a chance to capture a new snapshot of my website each day. Sign up to Benjamin Tran to get exclusive benefits, reward points, and unlimited access of downloadable files.
           <ul id="list-no-login"><b>Without signing in, you can:</b>
             <li>View every page and article</li>
